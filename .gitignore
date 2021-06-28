@@ -1,0 +1,21 @@
+#sensitive information
+.info.txt
+
+# dependencies
+node_modules
+
+# production
+admin-panelis
+build
+
+# misc
+.eslintcache
+.DS_Store
+.env
+.env.local
+.env.development
+.env.test.local
+.env.production
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*

@@ -1,0 +1,6 @@
+{
+  "short_name": "RT",
+  "name": "React Template",
+  "start_url": ".",
+  "display": "standalone"
+}
