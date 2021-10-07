@@ -1,37 +1,42 @@
-const express = require('express');
 require('dotenv').config({ path: '.env' });
+const express = require('express');
+const cors = require('cors');
+const http = require('http');
 const cookieParser = require('cookie-parser');
-const db = require('mongoose');
 const moment = require('moment');
+const db = require('mongoose');
 const morgan = require('./middleware/morgan');
+const softDeletePlugin = require('./models/plugins/softDelete');
 
-db.connect(process.env.MONGO_URL, {
-  useUnifiedTopology: true,
-  useFindAndModify: false,
-  useNewUrlParser: true,
-  useCreateIndex: true,
-  autoIndex: true,
-});
-
-db.connection.on('error', () => {
-  console.log('MongoDB connection Error');
-});
-
-db.connection.on('open', () => {
-  console.log('Connected to DB!');
-});
-
-const app = express();
-
-app.use(morgan);
-app.use(cookieParser());
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
+db.plugin(softDeletePlugin);
 
 const api = require('./routes/index');
 
-app.use('/api', api);
+const environment = process.env.NODE_ENV;
+const mongoUrl = environment === 'local' ? process.env.MONGO_URL_LOCAL : process.env.MONGO_URL;
 
-app.listen(process.env.PORT, () => {
-  console.log(`Server started ${moment().format('DD.MM.YYYY HH:mm:ss')}`);
-});
+async function main() {
+  await db.connect(mongoUrl, {
+    useUnifiedTopology: true,
+    useFindAndModify: false,
+    useNewUrlParser: true,
+    useCreateIndex: true,
+    autoIndex: true,
+  });
+  console.log('Connected to DB!');
+
+  const app = express();
+
+  app.use(morgan);
+  app.use(cors());
+  app.use(cookieParser());
+  app.use(express.json());
+  app.use(express.urlencoded({ extended: false }));
+  app.use('/api', api);
+
+  const server = http.createServer(app);
+
+  server.listen(process.env.PORT, () => console.log(`Server started ${moment().format('DD.MM.YYYY HH:mm:ss:SSS')}`));
+}
+
+main().catch((err) => console.error(err));
