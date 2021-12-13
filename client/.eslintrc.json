@@ -6,13 +6,18 @@
   },
   "extends": ["plugin:react/recommended", "airbnb", "plugin:react/jsx-runtime"],
   "parserOptions": {
-    "ecmaFeatures": {
-      "jsx": true
-    },
+    "ecmaFeatures": { "jsx": true },
     "ecmaVersion": 12,
     "sourceType": "module"
   },
   "plugins": ["react"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "moduleDirectory": ["node_modules", "src"]
+      }
+    }
+  },
   "rules": {
     "indent": ["error", 2],
     "no-console": ["error", { "allow": ["warn", "error", "info", "log"] }],
@@ -24,6 +29,6 @@
     "no-plusplus": [2, { "allowForLoopAfterthoughts": true }],
     "no-mixed-operators": "off",
     "quote-props": ["error", "as-needed"],
-    "max-len": 0
+    "func-names": "off"
   }
 }

@@ -1,28 +1,51 @@
 import { Component } from 'react';
-import PropTypes from 'prop-types';
-import '../../styles/Main.scss';
+import Default from 'components/Default';
+import './styles.scss';
 
-const propTypes = {
-  text: PropTypes.string,
-};
-
-const defaultProps = {
-  text: 'Hello World',
-};
-
-export default class Main extends Component {
+class Main extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      text: '',
+    };
+  }
+
+  componentDidMount() {
+    this.getServerResponse();
+  }
+
+  getServerResponse() {
+    fetch(`${process.env.REACT_APP_SERVER_API}/`)
+      .then(((res) => res.json()))
+      .then((res) => {
+        const { data, status, message } = res;
+
+        if (status === 'success') {
+          const { sampleResponse } = data;
+
+          this.setState({ text: sampleResponse });
+        } else {
+          console.log(message);
+        }
+      })
+      .catch((err) => {
+        console.error(err);
+      });
   }
 
   render() {
-    const { text } = this.props;
+    const { text } = this.state;
 
-    return <main>{text}</main>;
+    return (
+      <main className="main-view">
+        <div>
+          <Default />
+          <p>{text}</p>
+        </div>
+      </main>
+    );
   }
 }
 
-Main.propTypes = propTypes;
-Main.defaultProps = defaultProps;
+export default Main;

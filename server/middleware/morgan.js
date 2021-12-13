@@ -1,13 +1,12 @@
-/* eslint-disable no-nested-ternary */
 const morgan = require('morgan');
 const moment = require('moment');
 const chalk = require('chalk');
 
-morgan.token('date', () => moment().format('DD-MM-YYYY HH:mm:ss:sss'));
+morgan.token('date', () => moment().format('DD-MM-YYYY HH:mm:ss:SSS'));
 
 morgan.token('status', (req, res) => {
-  // get the status code of response
-  const status = (typeof res.headersSent !== 'boolean' ? Boolean(res.header) : res.headersSent)
+  // get the status code of response written
+  const status = (typeof res.headersSent !== 'boolean' ? !!res.header : res.headersSent)
     ? res.statusCode
     : undefined;
 
