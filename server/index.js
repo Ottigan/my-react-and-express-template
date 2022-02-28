@@ -16,11 +16,9 @@ const environment = process.env.NODE_ENV;
 const mongoUrl = environment === 'local' ? process.env.MONGO_URL_LOCAL : process.env.MONGO_URL;
 
 async function main() {
-  await db.connect(mongoUrl, {
+  db.connect(mongoUrl, {
     useUnifiedTopology: true,
-    useFindAndModify: false,
     useNewUrlParser: true,
-    useCreateIndex: true,
     autoIndex: true,
   });
   console.log('Connected to DB!');

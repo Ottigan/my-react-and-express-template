@@ -1,17 +1,15 @@
 import {
-  BrowserRouter as Router, Switch, Route,
+  BrowserRouter, Routes, Route,
 } from 'react-router-dom';
 import Main from './views/main';
 
 function App() {
   return (
-    <Router basename="/">
-      <Switch>
-        <Switch>
-          <Route exact path="/" component={Main} />
-        </Switch>
-      </Switch>
-    </Router>
+    <BrowserRouter basename="/">
+      <Routes>
+        <Route exact path="/" element={<Main />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
 
