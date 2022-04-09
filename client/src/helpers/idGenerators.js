@@ -21,7 +21,7 @@ function uuidv4() {
   return id;
 }
 
-function* sequentalIdGenerator() {
+function* sequentialIdGenerator() {
   let i = 0;
 
   while (true) {
@@ -31,5 +31,5 @@ function* sequentalIdGenerator() {
 
 export {
   uuidv4,
-  sequentalIdGenerator,
+  sequentialIdGenerator,
 };

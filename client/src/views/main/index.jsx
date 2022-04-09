@@ -1,5 +1,5 @@
 import { Component } from 'react';
-import Default from 'components/Default';
+import Test from 'components/Test';
 import './styles.scss';
 
 class Main extends Component {
@@ -16,15 +16,13 @@ class Main extends Component {
   }
 
   getServerResponse() {
-    fetch(`${process.env.REACT_APP_SERVER_API}/`)
+    fetch(`${process.env.SERVER_API}/`)
       .then(((res) => res.json()))
       .then((res) => {
         const { data, status, message } = res;
 
         if (status === 'success') {
-          const { sampleResponse } = data;
-
-          this.setState({ text: sampleResponse });
+          this.setState({ text: data.message });
         } else {
           console.log(message);
         }
@@ -40,7 +38,7 @@ class Main extends Component {
     return (
       <main className="main-view">
         <div>
-          <Default />
+          <Test />
           <p>{text}</p>
         </div>
       </main>

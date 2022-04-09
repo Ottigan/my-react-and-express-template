@@ -2,7 +2,8 @@
   "env": {
     "browser": true,
     "es2021": true,
-    "node": true
+    "node": true,
+    "jest/globals": true
   },
   "extends": ["plugin:react/recommended", "airbnb", "plugin:react/jsx-runtime"],
   "parserOptions": {
@@ -10,7 +11,7 @@
     "ecmaVersion": 12,
     "sourceType": "module"
   },
-  "plugins": ["react"],
+  "plugins": ["react", "jest"],
   "settings": {
     "import/resolver": {
       "node": {
@@ -22,7 +23,10 @@
     "indent": ["error", 2],
     "no-console": ["error", { "allow": ["warn", "error", "info", "log"] }],
     "prefer-const": ["error", { "destructuring": "all" }],
-    "jsx-a11y/label-has-associated-control": ["error", { "required": { "some": ["nesting", "id"] } }],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      { "required": { "some": ["nesting", "id"] } }
+    ],
     "jsx-a11y/click-events-have-key-events": "off",
     "no-underscore-dangle": "off",
     "semi": ["warn", "always"],

@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
       message: 'Test server response!',
     });
   } catch (err) {
-    const message = parseErrorRes(res, err, 'Default errror...');
+    const message = parseErrorRes(res, err, 'Default error...');
 
     res.send({
       status: 'error',

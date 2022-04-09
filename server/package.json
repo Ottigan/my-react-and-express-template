@@ -8,7 +8,9 @@
   "license": "ISC",
   "scripts": {
     "start": "nodemon",
-    "kill": "kill-port 5000"
+    "debug": "nodemon --inspect=6000 index.js",
+    "kill": "kill-port 5000",
+    "test": "jest"
   },
   "dependencies": {
     "chalk": "^4.1.2",
@@ -24,7 +26,14 @@
     "eslint": "^8.10.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-plugin-import": "^2.25.4",
+    "eslint-plugin-jest": "^26.1.4",
+    "jest": "^27.5.1",
     "kill-port": "^1.6.1",
     "nodemon": "^2.0.15"
+  },
+  "jest": {
+    "moduleFileExtensions": [
+      "js"
+    ]
   }
 }
