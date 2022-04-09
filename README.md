@@ -1,1 +1,1 @@
-# My React and Express template
+# My MERN template
